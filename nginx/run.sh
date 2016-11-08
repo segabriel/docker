@@ -7,8 +7,8 @@ docker rm ${CONTAINER_NAME}
 
 docker run \
 	--detach \
-	--publish 8080:8080 \
-	--publish 443:443 \
+	--publish 80:80 \
+	--publish 444:443 \
 	--name ${CONTAINER_NAME} \
 	${IMAGE_NAME}
 

@@ -2,6 +2,8 @@ FROM segabriel/java:8
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
+CMD ["/sbin/my_init"]
+
 ENV ELASTICSEARCH_VERSION 2.4.1
 ENV ELASTICSEARCH_DEB_URL https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.deb
 
@@ -23,17 +25,16 @@ RUN set -e \
 
 COPY config ./config
 
-VOLUME /usr/share/elasticsearch/data
+RUN mkdir /etc/service/elasticsearch
+COPY start.sh /etc/service/elasticsearch/run
+RUN chmod +x /etc/service/elasticsearch/run
 
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
+VOLUME /usr/share/elasticsearch/data
+
 EXPOSE 9200 9300
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-CMD /sbin/my_init
-
-USER elasticsearch
-CMD elasticsearch

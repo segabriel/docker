@@ -15,12 +15,10 @@ RUN set -e \
 	&& dpkg -i /elasticsearch.deb \
 	&& rm /elasticsearch.deb*
 
+WORKDIR /usr/share/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-WORKDIR /usr/share/elasticsearch
-
-RUN set -e && \
-	for path in ./data ./logs ./config ./config/scripts ; do \
+RUN for path in ./data ./logs ./config ./config/scripts ; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done

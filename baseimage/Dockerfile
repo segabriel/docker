@@ -2,6 +2,8 @@ FROM phusion/baseimage
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
+ENV TERM xterm
+
 RUN apt-get -qq update && apt-get install -yqq mc --no-install-recommends > /dev/null \
 	&& rm -rf /var/lib/apt/lists/*
 

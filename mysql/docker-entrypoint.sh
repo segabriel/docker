@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VOLUME_HOME="/var/lib/mysql"
+MYSQL_VOLUME_HOME=${MYSQL_VOLUME_HOME:-"/var/lib/mysql"}
 
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-}
 
@@ -13,20 +13,17 @@ MYSQL_REMOTE_ROOT_NAME=${MYSQL_REMOTE_ROOT_NAME:-}
 MYSQL_REMOTE_ROOT_PASS=${MYSQL_REMOTE_ROOT_PASS:-}
 MYSQL_REMOTE_ROOT_HOST=${MYSQL_REMOTE_ROOT_HOST:-"172.17.0.1"}
 
-#MYSQL_CHARSET=${MYSQL_CHARSET:-"utf8"}
-#MYSQL_COLLATION=${MYSQL_COLLATION:-"utf8_unicode_ci"}
+if [[ ! -d ${MYSQL_VOLUME_HOME}/mysql ]]; then
+    echo "=> An empty or uninitialized MySQL volume is detected in $MYSQL_VOLUME_HOME"
 
-if [[ ! -d $VOLUME_HOME/mysql ]]; then
-    echo "=> An empty or uninitialized MySQL volume is detected in $VOLUME_HOME"
-
-    if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+    if [ -z ${MYSQL_ROOT_PASSWORD} ]; then
 		echo >&2 'error: database is uninitialized and password option is not specified '
 		echo >&2 '=> You need to specify MYSQL_ROOT_PASSWORD '
 		exit 1
 	fi
 
-	mkdir -p "$VOLUME_HOME"
-	chown -R mysql:mysql "$VOLUME_HOME"
+	mkdir -p ${MYSQL_VOLUME_HOME}
+	chown -R mysql:mysql ${MYSQL_VOLUME_HOME}
 
 	echo '=> Initializing database'
 
@@ -48,7 +45,7 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
 		if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
 			break
 		fi
-		echo 'MySQL init process in progress...'
+		echo '=> MySQL init process in progress...'
 		sleep 1
 	done
 	if [ "$i" = 0 ]; then
@@ -72,7 +69,7 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
 		mysql+=( -p"${MYSQL_ROOT_PASSWORD}" )
 	fi
 
-    if [ -z "$MYSQL_ROOT_PASSWORD"]; then
+    if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
 		echo >&2 'error: database is uninitialized and password option is not specified '
 		echo >&2 '=> You need to specify MYSQL_ROOT_PASSWORD '
 		exit 1
@@ -104,7 +101,7 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
 	echo '=> MySQL init process done. Ready for start up.'
 	echo
 
-	mysqladmin -uroot -p"${MYSQL_ROOT_PASSWORD}" shutdown
+	mysqladmin -uroot -p${MYSQL_ROOT_PASSWORD} shutdown
 
 else
     echo "=> Booting on existing volume!"

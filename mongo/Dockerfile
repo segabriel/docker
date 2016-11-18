@@ -1,4 +1,4 @@
-FROM phusion/baseimage
+FROM segabriel/baseimage
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <tomcat-users xmlns="http://tomcat.apache.org/xml"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
-              version="1.0">
-<!--
-  NOTE:  By default, no user is included in the "manager-gui" role required
-  to operate the "/manager/html" web application.  If you wish to use this app,
-  you must define such a user - the username and password are arbitrary. It is
-  strongly recommended that you do NOT use one of the users in the commented out
-  section below since they are intended for use with the examples web
-  application.
--->
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+			  version="1.0">
+	<!--
+      NOTE:  By default, no user is included in the "manager-gui" role required
+      to operate the "/manager/html" web application.  If you wish to use this app,
+      you must define such a user - the username and password are arbitrary. It is
+      strongly recommended that you do NOT use one of the users in the commented out
+      section below since they are intended for use with the examples web
+      application.
+    -->
 
-  <role rolename="manager-gui"/>
-  <role rolename="manager-status"/>
-  <user username="tomcat" password="tomcatP@ssword" roles="manager-gui"/>
-  <user username="tomcat_view" password="tomcat_viewP@ssword" roles="manager-status"/>
+	<role rolename="manager-gui"/>
+	<role rolename="manager-status"/>
+	<user username="tomcat" password="tomcatP@ssword" roles="manager-gui"/>
+	<user username="tomcat_view" password="tomcat_viewP@ssword" roles="manager-status"/>
 
 </tomcat-users>

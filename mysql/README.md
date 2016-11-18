@@ -8,6 +8,7 @@ To create a new user you should specify the MYSQL_USER and MYSQL_PASSWORD variab
 
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION
     GRANT ALL PRIVILEGES ON `${MYSQL_DATABASE}`.* TO '${MYSQL_USER}'@'%'
+    GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_REMOTE_ROOT_NAME}'@'${MYSQL_REMOTE_ROOT_HOST}' WITH GRANT OPTION
 
 #### To connect mysql
 

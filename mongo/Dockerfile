@@ -14,7 +14,7 @@ WORKDIR /mongodb
 
 # Get Mongo
 RUN set -e \
-	&& curl -# "$MONGO_TGZ_URL" -o /mongo.tgz \
+	&& curl -SL# "$MONGO_TGZ_URL" -o /mongo.tgz \
 	&& tar -zxf /mongo.tgz -C / \
 	&& mv /mongodb-linux-x86_64-$MONGO_VERSION ./ \
 	&& rm /mongo.tgz*

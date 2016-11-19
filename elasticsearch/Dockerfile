@@ -13,7 +13,7 @@ WORKDIR /usr/share/elasticsearch
 
 # Get Elasticsearch
 RUN set -e \
-	&& curl -# "$ELASTICSEARCH_DEB_URL" -o /elasticsearch.deb \
+	&& curl -SL# "$ELASTICSEARCH_DEB_URL" -o /elasticsearch.deb \
 	&& dpkg -i /elasticsearch.deb \
 	&& rm /elasticsearch.deb*
 

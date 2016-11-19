@@ -1,10 +1,10 @@
 #!/bin/bash
 CONTAINER_NAME="tomcat"
-IMAGE_NAME="segabriel/tomcat:8.5.6"
-TOMCAT_WEBAPPS="/opt/tomcat/webapps"
+IMAGE_NAME="segabriel/tomcat:8.5.8"
+#TOMCAT_WEBAPPS="/opt/tomcat/webapps"
 
-mkdir -p ${TOMCAT_WEBAPPS}
-chmod -R 777 ${TOMCAT_WEBAPPS}
+#mkdir -p ${TOMCAT_WEBAPPS}
+#chmod -R 777 ${TOMCAT_WEBAPPS}
 
 docker stop ${CONTAINER_NAME}
 docker rm ${CONTAINER_NAME}

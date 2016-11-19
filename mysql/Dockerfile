@@ -3,9 +3,11 @@ FROM segabriel/baseimage
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
 ENV MYSQL_VERSION 5.7
-ENV MYSQL_VOLUME_HOME="/var/lib/mysql"
+ENV MYSQL_VOLUME_HOME /var/lib/mysql
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
+
+WORKDIR /etc/mysql
 
 RUN { \
 		echo mysql-community-server mysql-community-server/data-dir select ''; \
@@ -23,9 +25,9 @@ RUN mkdir /etc/service/mysql
 COPY start.sh /etc/service/mysql/run
 RUN chmod +x /etc/service/mysql/run
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /docker-mysql-entrypoint.sh
+RUN chmod +x /docker-mysql-entrypoint.sh
+ENTRYPOINT ["/docker-mysql-entrypoint.sh"]
 
 CMD ["/sbin/my_init"]
 

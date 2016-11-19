@@ -2,12 +2,14 @@ FROM segabriel/java:8
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
-CMD ["/sbin/my_init"]
+ENV ELASTICSEARCH_VERSION 2.4.1
+ENV ELASTICSEARCH_DEB_URL https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.deb
+ENV ELASTICSEARCH_VOLUME_DATA_STORAGE /usr/share/elasticsearch/data
+ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 RUN groupadd -r elasticsearch && useradd -r -g elasticsearch elasticsearch
 
-ENV ELASTICSEARCH_VERSION 2.4.1
-ENV ELASTICSEARCH_DEB_URL https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.deb
+WORKDIR /usr/share/elasticsearch
 
 # Get Elasticsearch
 RUN set -e \
@@ -15,13 +17,8 @@ RUN set -e \
 	&& dpkg -i /elasticsearch.deb \
 	&& rm /elasticsearch.deb*
 
-WORKDIR /usr/share/elasticsearch
-ENV PATH /usr/share/elasticsearch/bin:$PATH
-
-RUN for path in ./data ./logs ./config ./config/scripts ; do \
-		mkdir -p "$path"; \
-		chown -R elasticsearch:elasticsearch "$path"; \
-	done
+RUN mkdir -p $ELASTICSEARCH_VOLUME_DATA_STORAGE ./logs ./config ./config/scripts \
+	&& chown -R elasticsearch:elasticsearch $ELASTICSEARCH_VOLUME_DATA_STORAGE ./logs ./config ./config/scripts
 
 COPY config ./config
 
@@ -29,11 +26,11 @@ RUN mkdir /etc/service/elasticsearch
 COPY start.sh /etc/service/elasticsearch/run
 RUN chmod +x /etc/service/elasticsearch/run
 
-COPY docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /docker-elasticsearch-entrypoint.sh
+RUN chmod +x /docker-elasticsearch-entrypoint.sh
+ENTRYPOINT ["/docker-elasticsearch-entrypoint.sh"]
 
-VOLUME /usr/share/elasticsearch/data
+CMD ["/sbin/my_init"]
 
 EXPOSE 9200 9300
 

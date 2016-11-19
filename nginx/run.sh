@@ -1,6 +1,6 @@
 #!/bin/bash
 CONTAINER_NAME="nginx"
-IMAGE_NAME="segabriel/nginx:latest"
+IMAGE_NAME="segabriel/nginx:1.11.6"
 
 docker stop ${CONTAINER_NAME}
 docker rm ${CONTAINER_NAME}

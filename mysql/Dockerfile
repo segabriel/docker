@@ -15,7 +15,7 @@ RUN { \
 		echo mysql-community-server mysql-community-server/re-root-pass password ''; \
 		echo mysql-community-server mysql-community-server/remove-test-db select false; \
 	} | debconf-set-selections \
-	&& apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq mysql-server=$MYSQL_VERSION* --no-install-recommends > /dev/null \
+	&& apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq mysql-server=$MYSQL_VERSION* --no-install-recommends > /dev/null 2>&1 \
 	&& rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/mysql \
 	&& mkdir -p $MYSQL_VOLUME_HOME
 

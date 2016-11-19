@@ -1,1 +1,1 @@
-[Docker-tips](https://github.com/segabriel/docker/wiki/Docker-tips)
+[see wiki](https://github.com/segabriel/docker/wiki)

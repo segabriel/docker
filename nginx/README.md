@@ -7,9 +7,9 @@
 
     docker run -it --rm -p 80:80 segabriel/nginx:1.11.6 /sbin/my_init /bin/bash
 
-#### to attach to a running process segabriel/nginx:1.11.6 /bin/bash
+#### to attach to a running process
 
-    docker exec -it
+    docker exec -it segabriel/nginx:1.11.6 /bin/bash
 
 #### To check installed modules
 

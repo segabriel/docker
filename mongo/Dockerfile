@@ -17,9 +17,8 @@ RUN set -e \
 	&& curl -SL# "$MONGO_TGZ_URL" -o /mongo.tgz \
 	&& tar -zxf /mongo.tgz -C / \
 	&& mv /mongodb-linux-x86_64-$MONGO_VERSION ./ \
-	&& rm /mongo.tgz*
-
-RUN mkdir -p $MONGO_VOLUME_DATA_STORAGE $MONGO_VOLUME_DATA_CONFIG \
+	&& rm /mongo.tgz* \
+	&& mkdir -p $MONGO_VOLUME_DATA_STORAGE $MONGO_VOLUME_DATA_CONFIG \
 	&& chown -R mongodb:mongodb $MONGO_VOLUME_DATA_STORAGE $MONGO_VOLUME_DATA_CONFIG
 
 RUN mkdir /etc/service/mongodb

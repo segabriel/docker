@@ -15,9 +15,8 @@ WORKDIR /usr/share/elasticsearch
 RUN set -e \
 	&& curl -SL# "$ELASTICSEARCH_DEB_URL" -o /elasticsearch.deb \
 	&& dpkg -i /elasticsearch.deb \
-	&& rm /elasticsearch.deb*
-
-RUN mkdir -p $ELASTICSEARCH_VOLUME_DATA_STORAGE ./logs ./config ./config/scripts \
+	&& rm /elasticsearch.deb* \
+	&& mkdir -p $ELASTICSEARCH_VOLUME_DATA_STORAGE ./logs ./config ./config/scripts \
 	&& chown -R elasticsearch:elasticsearch $ELASTICSEARCH_VOLUME_DATA_STORAGE ./logs ./config ./config/scripts
 
 COPY config ./config

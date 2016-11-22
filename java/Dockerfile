@@ -19,6 +19,6 @@ RUN curl -SL# --header "Cookie: oraclelicense=accept-securebackup-cookie" "$JDK_
     && chown -R root:root ./ \
     && chmod -R a+rwX ./
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 CMD ["/sbin/my_init", "/bin/bash"]
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

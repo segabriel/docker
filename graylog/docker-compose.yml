@@ -1,0 +1,25 @@
+version: '2'
+services:
+  graylog-mongo:
+    image: "segabriel/graylog-mongo:3.3.15"
+    volumes:
+      - /opt/graylog/mongo/data:/data/db
+    ports:
+      - "27017:27017"
+  graylog-elasticsearch:
+    image: "segabriel/graylog-elasticsearch:2.4.1"
+    volumes:
+      - /opt/graylog/elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+  graylog:
+    image: segabriel/graylog:2.1.2
+    links:
+      - graylog-mongo:mongo
+      - graylog-elasticsearch:elasticsearch
+    ports:
+      - "9000:9000"
+      - "12201/udp:12201/udp"
+      - "1514/udp:1514/udp"
+      - "9001/udp:9001/udp"
+      - "9001:9001"

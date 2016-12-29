@@ -1,0 +1,23 @@
+elasticsearch:
+  image: segabriel/elasticsearch:5.1.1
+  environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g -Des.network.host=0.0.0.0"
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+logstash:
+  image: segabriel/logstash:5.1.1
+  volumes:
+    - ./logstash.conf:/usr/share/logstash/config/logstash.conf
+  ports:
+    - "5000:5000"
+  links:
+    - elasticsearch
+kibana:
+  image: kibana
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch
+  environment:
+    ELASTICSEARCH_URL: "http://elasticsearch:9200"

@@ -1,19 +1,25 @@
 version: '2'
 services:
   graylog-mongo:
-    image: "segabriel/graylog-mongo:3.3.15"
+    image: "segabriel/mongo:3.3.15"
     volumes:
       - /opt/graylog/mongo/data:/data/db
     ports:
       - "27017:27017"
   graylog-elasticsearch:
-    image: "segabriel/graylog-elasticsearch:2.4.1"
+    image: "segabriel/elasticsearch:2.4.1"
+    environment:
+      ELASTICSEARCH_OPTS: "-Des.network.host=0.0.0.0 -Des.cluster.name=graylog -Des.node.name=graylog"
     volumes:
       - /opt/graylog/elasticsearch/data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
   graylog:
     image: segabriel/graylog:2.1.2
+    environment:
+      GRAYLOG_PASSWORD_SECRET: superSecretPassword
+      GRAYLOG_ROOT_PASSWORD_SHA2: ab5c39620a81e237b66bd49554fc94e8eb23a60e99d01c5f3f0b30e8daee230e
+      GRAYLOG_WEB_ENDPOINT_URI: http://127.0.0.1:9000/api
     links:
       - graylog-mongo:mongo
       - graylog-elasticsearch:elasticsearch

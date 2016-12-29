@@ -1,6 +1,6 @@
 #!/bin/bash
 CONTAINER_NAME="elasticsearch"
-IMAGE_NAME="segabriel/elasticserch:2.4.1"
+IMAGE_NAME="segabriel/elasticsearch:2.4.1"
 ELASTICSEARCH_VOLUME_DATA_STORAGE="/opt/elasticsearch/data"
 
 mkdir -p ${ELASTICSEARCH_VOLUME_DATA_STORAGE}

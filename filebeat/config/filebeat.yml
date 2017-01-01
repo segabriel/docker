@@ -1,0 +1,26 @@
+#=========================== Filebeat prospectors =============================
+
+filebeat.prospectors:
+
+- input_type: log
+  paths:
+    - /var/log/*.log
+
+#================================ Outputs =====================================
+
+#------------------------------- File output -----------------------------------
+#output.file:
+#  enabled: true
+#  path: "/tmp/filebeat"
+#  filename: filebeat
+#  rotate_every_kb: 10000
+#  number_of_files: 7
+
+#-------------------------- Elasticsearch output -------------------------------
+output.elasticsearch:
+  hosts: ["172.17.0.2:9200"]
+  template.name: "filebeat"
+  template.path: "${FILEBEAT_HOME}/filebeat.template.json"
+  template.overwrite: false
+  template.versions.2x.enabled: false
+  template.versions.2x.path: "${FILEBEAT_HOME}/filebeat.template-es2x.json"

@@ -14,7 +14,7 @@ logstash:
   links:
     - elasticsearch
 kibana:
-  image: kibana
+  image: segabriel/kibana:5.1.1
   ports:
     - "5601:5601"
   links:

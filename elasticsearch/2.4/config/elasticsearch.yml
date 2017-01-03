@@ -4,3 +4,23 @@ cluster:
   name: myCluster
 node:
   name: "myNode"
+
+threadpool:
+  search:
+    type: fixed
+    size: 20
+    queue_size: 5000
+  bulk:
+    type: fixed
+    size: 60
+    queue_size: 5000
+  index:
+    type: fixed
+    size: 20
+    queue_size: 100
+
+indices:
+  memory:
+    index_buffer_size: 30%
+    min_shard_index_buffer_size: 12mb
+    min_index_buffer_size: 96mb

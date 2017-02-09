@@ -2,7 +2,7 @@ FROM segabriel/baseimage
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
-ENV MONGO_VERSION 3.3.15
+ENV MONGO_VERSION 3.4.2
 ENV MONGO_TGZ_URL https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGO_VERSION.tgz
 ENV MONGO_VOLUME_DATA_STORAGE /data/db
 ENV MONGO_VOLUME_DATA_CONFIG /data/configdb

@@ -1,10 +1,9 @@
-FROM segabriel/baseimage
+FROM segabriel/baseimage:0.9.22
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
-ENV REDIS_VERSION 3.2.5
+ENV REDIS_VERSION 4.0.2
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-$REDIS_VERSION.tar.gz
-ENV REDIS_DOWNLOAD_SHA1 6f6333db6111badaa74519d743589ac4635eba7a
 ENV REDIS_DATA_STORAGE /var/lib/redis
 ENV REDIS_LOG_STORAGE /var/log/redis
 ENV REDIS_CONFIG /etc/redis/redis.conf
@@ -20,7 +19,6 @@ RUN set -e \
 	&& apt-get install -y $buildDeps --no-install-recommends > /dev/null 2>&1 \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& curl -SL# "$REDIS_DOWNLOAD_URL" -o redis.tar.gz \
-	&& echo "$REDIS_DOWNLOAD_SHA1 *redis.tar.gz" | sha1sum -c - \
 	&& mkdir -p /usr/src/redis \
 	&& tar -zxf redis.tar.gz -C /usr/src/redis --strip-components=1 \
 	&& rm redis.tar.gz \

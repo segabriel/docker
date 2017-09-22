@@ -5,11 +5,11 @@
 
 #### to start an interactive BaSH session
 
-    docker run -it --rm -p 6379:6379 segabriel/redis:3.2.5 /sbin/my_init /bin/bash
+    docker run -it --rm -p 6379:6379 segabriel/redis:4.0.2 /sbin/my_init /bin/bash
 
 #### to attach to a running process
 
-    docker exec -it segabriel/redis:3.2.5 /bin/bash
+    docker exec -it segabriel/redis:4.0.2 /bin/bash
 
 #### To check redis
 

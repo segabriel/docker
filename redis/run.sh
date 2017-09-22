@@ -1,6 +1,6 @@
 #!/bin/bash
 CONTAINER_NAME="redis"
-IMAGE_NAME="segabriel/redis:3.2.5"
+IMAGE_NAME="segabriel/redis:4.0.2"
 
 docker stop ${CONTAINER_NAME}
 docker rm ${CONTAINER_NAME}

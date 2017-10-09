@@ -1,4 +1,4 @@
-FROM segabriel/baseimage
+FROM segabriel/baseimage:0.9.22
 
 MAINTAINER segabriel <sergiy.gabriel@gmail.com>
 
@@ -17,7 +17,8 @@ RUN { \
 	} | debconf-set-selections \
 	&& apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq mysql-server=$MYSQL_VERSION* --no-install-recommends > /dev/null 2>&1 \
 	&& rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/mysql \
-	&& mkdir -p $MYSQL_VOLUME_HOME
+	&& mkdir -p $MYSQL_VOLUME_HOME && chown -R mysql:mysql $MYSQL_VOLUME_HOME \
+	&& mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld
 
 COPY my.cnf /etc/mysql/my.cnf
 

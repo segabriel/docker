@@ -10,15 +10,12 @@ MYSQL_REMOTE_ROOT_PASS="remoteSecretPassword"
 
 MYSQL_CONTAINER_NAME="mysql"
 MYSQL_IMAGE_NAME="segabriel/mysql:5.7"
-MYSQL_DATA_HOME="/opt/mysql/data"
-MYSQL_LOG_HOME="/opt/mysql/log"
+MYSQL_DATA_HOME="/opt/docker/mysql/data"
+MYSQL_LOG_HOME="/opt/docker/mysql/log"
 
-rm -rf ${MYSQL_DATA_HOME}
-mkdir -p ${MYSQL_DATA_HOME}
-chmod -R 777 ${MYSQL_DATA_HOME}
-rm -rf ${MYSQL_LOG_HOME}
-mkdir -p ${MYSQL_LOG_HOME}
-chmod -R 777 ${MYSQL_LOG_HOME}
+rm -rf ${MYSQL_DATA_HOME} ${MYSQL_LOG_HOME}
+mkdir -p ${MYSQL_DATA_HOME} ${MYSQL_LOG_HOME}
+chmod -R 777 ${MYSQL_DATA_HOME} ${MYSQL_LOG_HOME}
 
 docker stop ${MYSQL_CONTAINER_NAME}
 docker rm ${MYSQL_CONTAINER_NAME}
